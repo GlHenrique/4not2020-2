@@ -7,6 +7,8 @@ require('dotenv').config();
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const teste = require('./routes/teste');
+const curso = require('./routes/curso');
+
 const db = require('./config/database');
 
 db(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.nikss.gcp.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`);
@@ -20,7 +22,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+
 app.use('/users', usersRouter);
+
 app.use('/teste', teste);
+
+app.use('/curso', curso);
 
 module.exports = app;
