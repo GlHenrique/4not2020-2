@@ -8,6 +8,7 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const teste = require('./routes/teste');
 const curso = require('./routes/curso');
+const professor = require('./routes/professor');
 
 const db = require('./config/database');
 
@@ -28,5 +29,7 @@ app.use('/users', usersRouter);
 app.use('/teste', teste);
 
 app.use('/curso', curso);
+
+app.use('/professor', professor);
 
 module.exports = app;
