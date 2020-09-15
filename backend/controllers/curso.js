@@ -40,18 +40,21 @@ controller.listarUm = async (req, res) => {
 };
 
 controller.editar = async (req, res) => {
+  const { id } = req.params;
+  const {
+    nome, ementa, carga_horaria, nivel, valor_curso,
+  } = req.body;
   try {
-    const { id } = req.params;
-    const {
+    const dados = await Curso.findOneAndUpdate(id, {
       nome, ementa, carga_horaria, nivel, valor_curso,
-    } = req.body;
-
-    await Curso.updateOne({ _id: id }, {
-      $set: {
-        nome, ementa, carga_horaria, nivel, valor_curso,
-      },
     });
-    res.send(204);
+    if (dados) {
+      res.send(204);
+    } else {
+      res.status(400).json({
+        error: 'Id not found',
+      });
+    }
   } catch (err) {
     console.log(err);
     res.status(500).send(err);
@@ -59,13 +62,15 @@ controller.editar = async (req, res) => {
 };
 
 controller.excluir = async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.body;
   try {
-    const dados = await Curso.findByIdAndRemove(id);
+    const dados = await Curso.findByIdAndDelete(id);
     if (dados) {
-      res.json(dados);
+      res.send(204);
     } else {
-      res.send(404).end();
+      res.status(400).json({
+        error: 'Id not found',
+      });
     }
   } catch (err) {
     console.log(err);
