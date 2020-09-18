@@ -9,6 +9,8 @@ const usersRouter = require('./routes/users');
 const teste = require('./routes/teste');
 const curso = require('./routes/curso');
 const professor = require('./routes/professor');
+const salaAula = require('./routes/sala_aula');
+const turma = require('./routes/turma');
 
 const db = require('./config/database');
 
@@ -31,5 +33,9 @@ app.use('/teste', teste);
 app.use('/curso', curso);
 
 app.use('/professor', professor);
+
+app.use('/sala-aula', salaAula);
+
+app.use('/turma', turma);
 
 module.exports = app;
