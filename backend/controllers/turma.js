@@ -16,7 +16,10 @@ controller.novo = async (req, res) => {
 
 controller.listar = async (req, res) => {
   try {
-    const dados = await Turma.find();
+    const dados = await Turma.find()
+      .populate('curso', 'nome')
+      .populate('professor')
+      .populate('sala_aula', 'nome capacidade');
     res.send(dados);
   } catch (err) {
     console.log(err);
